@@ -1,0 +1,12 @@
+[Unit]
+Description=Wreck3D Controller Startup
+Before=klipper.service octoprint.service
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/scripts/wreck3dctrl
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

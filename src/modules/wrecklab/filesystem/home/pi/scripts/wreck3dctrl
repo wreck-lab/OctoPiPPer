@@ -1,0 +1,41 @@
+#!/bin/bash
+
+log_date() {
+    while IFS= read -r line; do
+        echo "$(date) $line"
+    done
+}
+createAdHocNetwork() {
+    systemctl stop hostapd
+    systemctl stop dnsmasq
+    systemctl stop dhcpcd
+    ip link set dev wlan0 down
+    ip addr add 192.168.0.1/24 dev wlan0
+    ip link set dev wlan0 up
+    systemctl start dnsmasq
+    systemctl start hostapd
+}
+
+# if first run, flash the printHAT
+if [ -f "/boot/firstrun" ]; then 
+    
+    # Enables NTP to update date and time from internet
+    timedatectl set-ntp True
+
+    #clear terminal history
+    cat /dev/null > /home/pi/.bash_history && history -c
+
+	# flash
+	cd /home/pi/klipper 
+	/usr/bin/make flash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> /var/log/initlog.log 2>&1
+	
+	# shut down 
+	/usr/bin/rm -f /boot/firstrun | log_date >> /var/log/initlog.log 2>&1
+	shutdown now | log_date >> /var/log/initlog.log 2>&1
+fi
+
+# if no network, set up an hotspot
+_IP=$(hostname -I) || true
+if ! [ "$_IP" ]; then
+        createAdHocNetwork
+fi
