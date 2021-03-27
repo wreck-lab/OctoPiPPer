@@ -54,10 +54,13 @@ jobs:
 
         echo "::set-output name=image::$IMAGE"
 
+    - name: Compress the image
+      run: zip $IMAGE.zip $IMAGE.img
+    
     # artifact upload will take care of zipping for us
     - uses: actions/upload-artifact@v1
       with:
         name: ${{ steps.copy.outputs.image }}
-        path: ${{ steps.copy.outputs.image }}.img
+        path: ${{ steps.copy.outputs.image }}.zip
         
         
