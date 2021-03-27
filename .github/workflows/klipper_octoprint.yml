@@ -51,11 +51,10 @@ jobs:
         IMAGE=$NOW-wrecklab-$DIST_VERSION
 
         cp repository/src/workspace/*.img $IMAGE.img
-
+        
+        zip $IMAGE.zip $IMAGE.img
+        
         echo "::set-output name=image::$IMAGE"
-
-    - name: Compress the image
-      run: zip $IMAGE.zip $IMAGE.img
     
     # artifact upload will take care of zipping for us
     - uses: actions/upload-artifact@v1
