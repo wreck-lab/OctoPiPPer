@@ -1,4 +1,4 @@
-name: Build with OctoPrint
+name: Build with Klipper + OctoPrint
 
 on:
   workflow_dispatch:
