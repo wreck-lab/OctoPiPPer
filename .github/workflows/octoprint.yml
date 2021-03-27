@@ -1,12 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -46,13 +42,6 @@ jobs:
         cd repository/src
         sudo bash -x ./build_dist
         
-    
-    - name: Checkout Klipper
-      uses: actions/checkout@v2
-      with:
-        repository: 'KevinOConnor/klipper'
-        path: klipper        
-
     - name: Copy output
       id: copy
       run: |
@@ -66,7 +55,6 @@ jobs:
 
     # artifact upload will take care of zipping for us
     - uses: actions/upload-artifact@v1
-      if: github.event_name == 'schedule'
       with:
         name: ${{ steps.copy.outputs.image }}
         path: ${{ steps.copy.outputs.image }}.img
