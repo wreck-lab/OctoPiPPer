@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Wrecklab
+# Adds to /boot configuration files that setup the firstrun and UART usage
+# Written by Wrecklab <wrecklab at wrecklab dot com>
+# 
+########
+set -x
+set -e
+
+export LC_ALL=C
+
+source /common.sh
+
+# unpack the content of the module
+unpack /filesystem/boot /boot
+
+# TODO: add these lines to config.txt 
+# needed by wreck3dctrl
+#enable-uart=1
+#dtoverlay=pi3-miniuart-bt
+
+# TODO: replace existing cmdline.txt with this
+# dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=0fcaf443-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
