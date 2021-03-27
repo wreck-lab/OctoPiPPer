@@ -46,3 +46,23 @@ jobs:
       with:
         repository: 'KevinOConnor/klipper'
         path: klipper        
+
+    - name: Copy output
+      id: copy
+      run: |
+        source repository/src/config
+        NOW=$(date +"%Y-%m-%d-%H%M")
+        IMAGE=$NOW-wrecklab-$DIST_VERSION
+
+        cp repository/src/workspace/*.img $IMAGE.img
+
+        echo "::set-output name=image::$IMAGE"
+
+    # artifact upload will take care of zipping for us
+    - uses: actions/upload-artifact@v1
+      if: github.event_name == 'schedule'
+      with:
+        name: ${{ steps.copy.outputs.image }}
+        path: ${{ steps.copy.outputs.image }}.img
+        
+        
