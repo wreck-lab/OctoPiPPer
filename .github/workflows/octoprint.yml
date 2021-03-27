@@ -19,13 +19,14 @@ jobs:
       with:
         repository: 'guysoft/CustomPiOS'
         path: CustomPiOS
-        ref: "devel"
+        ref: "master"
       
     - name: Checkout Project Repository
       uses: actions/checkout@v2
       with:
         path: repository
         submodules: true
+        ref: "master"
 
     - name: Download Raspbian Image
       run: |
