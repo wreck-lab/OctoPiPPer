@@ -23,11 +23,17 @@ jobs:
         path: repository
         submodules: true
 
+      # do Kconfig for STM32f1 (printhat v1) or STM32f4 (v2)
+      # do make
+      
+      # v1: configure the script to autoflash on firstrun
+      
     - name: Download Raspbian Image
       run: |
         cd repository/src/image
         wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspios_lite_armhf_latest'
 
+     # make CustomPiOS aware of modules defined in this repo
     - name: Update CustomPiOS Paths
       run: |
         cd repository/src

@@ -1,1 +1,2 @@
-# intentionally left blank
+WRECKLAB_VAR="This is a module variable"
+[ -n "$WRECKLAB_PRINTHAT_VER" ] || WRECKLAB_PRINTHAT_VER=v1

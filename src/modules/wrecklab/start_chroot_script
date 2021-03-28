@@ -13,11 +13,32 @@ source /common.sh
 
 # unpack the content of the module
 unpack /filesystem/boot /boot
+unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/etc /etc
 
-# TODO: add these lines to config.txt 
-# needed by wreck3dctrl
-#enable-uart=1
-#dtoverlay=pi3-miniuart-bt
+# files in boot
+sed 's/console=serial0,115200 //g' /boot/cmdline.txt
+echo 'enable-uart=1' >> /boot/config.txt
+echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
+
+# files in home
+if [ "$WRECKLAB_PRINTHAT_VER" == "v1" ]
+then
+	echo "--- Configuring printHAT v1"
+	cd /home/pi/klipper
+	cp phatv1_defconfig .config
+    make
+    cd ..
+    cp klipper/config/generic-wrecklab-printhat-v1-cartesian.cfg printer.cfg
+elif [ "$WRECKLAB_PRINTHAT_VER" == "v2" ] 
+then
+	echo "--- Configuring printHAT v2"
+	cd /home/pi/klipper
+	cp phatv2_defconfig .config
+    make
+    cd ..
+    cp klipper/config/generic-wrecklab-printhat-v2-cartesian.cfg printer.cfg
+fi
 
 # TODO: replace existing cmdline.txt with this
 # dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=0fcaf443-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
