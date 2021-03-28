@@ -14,7 +14,7 @@ source /common.sh
 # unpack the content of the module
 unpack /filesystem/boot /boot
 unpack /filesystem/home/pi /home/pi pi
-unpack /filesystem/etc /etc
+unpack /filesystem/etc /etc root
 
 # files in boot
 sed 's/console=serial0,115200 //g' /boot/cmdline.txt
