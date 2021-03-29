@@ -14,7 +14,7 @@ source /common.sh
 # unpack the content of the module
 unpack /filesystem/boot /boot
 unpack /filesystem/home/pi /home/"${BASE_USER}" "${BASE_USER}"
-unpack /filesystem/root /root root
+unpack /filesystem/root /
 
 
 # files in boot
