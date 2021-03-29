@@ -18,7 +18,7 @@ unpack /filesystem/root /
 
 
 # files in boot
-sed -i 's/console\=serial0\,115200 //g' /boot/cmdline.txt
+#sed -i 's/console\=serial0\,115200//' /boot/cmdline.txt
 echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
