@@ -42,4 +42,5 @@ then
 fi
 
 # install OctoKlipper plugin
+sudo service octoprint stop
 sudo -u "${BASE_USER}" /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
