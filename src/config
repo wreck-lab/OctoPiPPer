@@ -2,4 +2,4 @@ export DIST_NAME=Wrecklab
 export DIST_VERSION=0.0.1
 export BASE_IMAGE_ENLARGEROOT=3000
 export BASE_IMAGE_RESIZEROOT=500
-export MODULES="base(raspicam, network, disable-services(octopi, auto-hotspot), wrecklab, password-for-sudo)"
+export MODULES="base(raspicam, network, disable-services(octopi, auto-hotspot, klipper=, password-for-sudo)"
