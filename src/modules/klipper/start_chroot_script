@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Klipper install script
+# Script that installs Klipper
+########
+
+# Source error handling, leave this in place
+set -x
+set -e
+
+source /common.sh
+install_cleanup_trap
+
+#unpack /filesystem/home/pi /home/pi pi
+
+echo "Installing Klipper"
+echo "$KLIPPER_VAR"
+
+apt update
+apt install wget git gpiod -y
+
+#Make sure user pi has access to serial ports
+usermod -a -G tty pi
+usermod -a -G dialout pi
+
+cd /home/pi
+gitclone KLIPPER_REPO klipper
+sudo -u pi bash ./klipper/scripts/install-octopi.sh
+
+#su -c '/home/pi/moonraker/scripts/sudo_fix.sh' - pi
+#rm /home/pi/install-custompios.sh
+# Run installation steps defined above
