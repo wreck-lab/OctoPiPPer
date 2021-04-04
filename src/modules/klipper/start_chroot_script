@@ -22,6 +22,6 @@ usermod -a -G dialout pi
 
 cd /home/pi
 gitclone KLIPPER_REPO klipper
-/home/pi/klipper/scripts/install-octopi.sh
+sudo -u ${BASE_USER} /home/pi/klipper/scripts/install-octopi.sh
 
 # Run installation steps defined above
