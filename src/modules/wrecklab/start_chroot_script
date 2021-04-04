@@ -41,6 +41,9 @@ then
     cp klipper/config/generic-wrecklab-printhat-v2-cartesian.cfg printer.cfg
 fi
 
+# start the 
+(crontab -u "${BASE_USER}" -l; echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
+
 # install OctoKlipper plugin
 #sudo service octoprint stop
 #sudo -u "${BASE_USER}" /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
