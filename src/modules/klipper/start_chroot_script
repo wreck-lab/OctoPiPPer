@@ -10,6 +10,8 @@ set -e
 source /common.sh
 install_cleanup_trap
 
+unpack /filesystem/home/pi /home/pi pi
+
 echo "Installing Klipper"
 echo "$KLIPPER_VAR"
 
@@ -22,6 +24,6 @@ usermod -a -G dialout pi
 
 cd /home/pi
 gitclone KLIPPER_REPO klipper
-sudo -u ${BASE_USER} /home/pi/klipper/scripts/install-octopi.sh
+sudo -u pi bash /home/pi/./install-custompios.sh
 
 # Run installation steps defined above
