@@ -42,5 +42,6 @@ then
 fi
 
 # install OctoKlipper plugin
-cd /home/pi
-sudo -u pi bash  /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
+#cd /home/pi
+#sudo -u pi bash /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
+sudo -u pi bash /home/pi/oprint/bin/octoprint plugins backup:restore /home/pi/octoprint-backup.zip
