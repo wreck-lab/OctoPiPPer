@@ -22,11 +22,6 @@ jobs:
       with:
         path: repository
         submodules: true
-
-      # do Kconfig for STM32f1 (printhat v1) or STM32f4 (v2)
-      # do make
-      
-      # v1: configure the script to autoflash on firstrun
       
     - name: Download Raspbian Image
       run: |
@@ -55,17 +50,22 @@ jobs:
         source repository/src/config
         NOW=$(date +"%Y-%m-%d-%H%M")
         IMAGE=$NOW-wrecklab-$DIST_VERSION
-
         cp repository/src/workspace/*.img $IMAGE.img
-        
-        zip $IMAGE.zip $IMAGE.img
-        
+        zip $IMAGE.zip $IMAGE.img     
         echo "::set-output name=image::$IMAGE"
     
+    - name: Release
+      uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        with:
+           files: ${{ steps.copy.outputs.image }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
     # artifact upload will take care of zipping for us
-    - uses: actions/upload-artifact@v1
-      with:
-        name: ${{ steps.copy.outputs.image }}
-        path: ${{ steps.copy.outputs.image }}.zip
+    #- uses: actions/upload-artifact@v1
+    #  with:
+    #    name: ${{ steps.copy.outputs.image }}
+    #    path: ${{ steps.copy.outputs.image }}.zip
         
         
