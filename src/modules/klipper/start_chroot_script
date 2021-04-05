@@ -10,7 +10,7 @@ set -e
 source /common.sh
 install_cleanup_trap
 
-unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/home/pi /home/${BASE_USER} ${BASE_USER}
 
 echo "Installing Klipper"
 echo "$KLIPPER_VAR"
@@ -23,7 +23,10 @@ usermod -a -G tty pi
 usermod -a -G dialout pi
 
 cd /home/pi
-gitclone KLIPPER_REPO klipper
+sudo -u "${BASE_USER}" git clone $KLIPPER_REPO_SHIP klipper
+cd /home/pi/klipper
+sudo -u "${BASE_USER}" git checkout tags/$KLIPPER_REPO_TAG
+
 sudo -u pi bash /home/pi/install-custompios.sh
 sudo -u pi bash /home/pi/install-config.sh
 
