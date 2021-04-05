@@ -53,15 +53,14 @@ jobs:
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img     
         echo "::set-output name=image::$IMAGE"
-    
+
     - name: Release
       uses: softprops/action-gh-release@v1
-        #if: startsWith(github.ref, 'refs/tags/')
-        with:
-           files: ${{ steps.copy.outputs.image }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+      with:
+         files: ${{ steps.copy.outputs.image }}.zip
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                   
     # artifact upload will take care of zipping for us
     #- uses: actions/upload-artifact@v1
     #  with:
