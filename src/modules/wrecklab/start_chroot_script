@@ -21,8 +21,7 @@ sed -i 's/console\=serial0\,115200 //' /boot/cmdline.txt
 echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
-# start the 
-#( echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
+# enable firstrun daemon 
 systemctl_if_exists enable wreck3dctrl.service
 
 # install OctoKlipper plugin
