@@ -22,25 +22,6 @@ sed -i 's/console\=serial0\,115200 //' /boot/cmdline.txt
 echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
-# files in home
-if [ "$WRECKLAB_PRINTHAT_VER" == "v1" ]
-then
-	echo "--- Configuring printHAT v1"
-	cd /home/pi/klipper
-	cp phatv1_defconfig .config
-    make
-    cd ..
-    cp klipper/config/generic-wrecklab-printhat-v1-cartesian.cfg printer.cfg
-elif [ "$WRECKLAB_PRINTHAT_VER" == "v2" ] 
-then
-	echo "--- Configuring printHAT v2"
-	cd /home/pi/klipper
-	cp phatv2_defconfig .config
-    make
-    cd ..
-    cp klipper/config/generic-wrecklab-printhat-v2-cartesian.cfg printer.cfg
-fi
-
 # start the 
 (crontab -u "${BASE_USER}" -l; echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
 
