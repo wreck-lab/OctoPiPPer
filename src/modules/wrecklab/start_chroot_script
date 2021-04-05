@@ -14,7 +14,7 @@ source /common.sh
 # unpack the content of the module
 unpack /filesystem/boot /boot
 unpack /filesystem/home/pi /home/"${BASE_USER}"  "${BASE_USER}"
-unpack /filesystem/root /
+#unpack /filesystem/root /
 
 # update files in /boot
 sed -i 's/console\=serial0\,115200 //' /boot/cmdline.txt
@@ -22,7 +22,7 @@ echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
 # start the 
-( echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
+#( echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
 
 # install OctoKlipper plugin
 echo "Installing OctoKlipper"
