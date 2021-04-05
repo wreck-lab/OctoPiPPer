@@ -24,7 +24,10 @@ usermod -a -G dialout pi
 
 cd /home/pi
 gitclone KLIPPER_REPO klipper
-sudo -u pi bash /home/pi/./install-custompios.sh
-sudo -u pi bash /home/pi/./install-config.sh
+sudo -u pi bash /home/pi/install-custompios.sh
+sudo -u pi bash /home/pi/install-config.sh
+
+rm /home/pi/install-custompios.sh
+rm /home/pi/install-config.sh
 
 # Run installation steps defined above
