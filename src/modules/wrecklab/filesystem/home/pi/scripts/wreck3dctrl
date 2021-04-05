@@ -14,7 +14,7 @@ if [ -f "/boot/firstrun" ]; then
     
 	# flash
 	cd /home/pi/klipper 
-	/usr/bin/make flash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> /var/log/initlog.log 2>&1
+	/usr/bin/make serialflash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> /var/log/initlog.log 2>&1
     
     #clear terminal history
     cat /dev/null > /home/pi/.bash_history && history -c
