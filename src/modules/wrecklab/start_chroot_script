@@ -14,7 +14,7 @@ source /common.sh
 # unpack the content of the module
 unpack /filesystem/boot /boot
 unpack /filesystem/home/pi /home/"${BASE_USER}"  "${BASE_USER}"
-#unpack /filesystem/root /
+unpack /filesystem/root /
 
 # update files in /boot
 sed -i 's/console\=serial0\,115200 //' /boot/cmdline.txt
