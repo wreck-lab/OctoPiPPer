@@ -1,11 +1,10 @@
 #!/bin/bash
-# This script installs Moonraker on a Raspberry Pi machine running
+# This script installs Klipper on a Raspberry Pi machine running
 # Raspbian/Raspberry Pi OS based distributions.
 
 KLIPPER_PYTHON_DIR="${HOME}/klippy-env"
 KLIPPER_SOURCE_DIR="${HOME}/klipper"
 SYSTEMDDIR="/etc/systemd/system"
-
 
 install_packages()
 {
@@ -95,7 +94,4 @@ report_status "Installing Klipper..."
 create_klipper_venv
 install_klipper_script
 install_klipper_config
-#report_status "Installing Moonraker..."
-#create_moonraker_venv
-#install_moonraker_script
 report_status "Install Complete!"
