@@ -16,8 +16,7 @@ unpack /filesystem/boot /boot
 unpack /filesystem/home/pi /home/"${BASE_USER}"  "${BASE_USER}"
 unpack /filesystem/root /
 
-
-# files in boot
+# update files in /boot
 sed -i 's/console\=serial0\,115200 //' /boot/cmdline.txt
 echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
