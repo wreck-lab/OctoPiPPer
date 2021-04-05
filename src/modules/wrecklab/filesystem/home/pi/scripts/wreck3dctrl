@@ -17,11 +17,11 @@ if [ -f "/boot/firstrun" ]; then
 	/usr/bin/make flash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> /var/log/initlog.log 2>&1
 	
 	# install OctoKlipper
-    echo "Installing OctoKlipper" | log_date >> /var/log/initlog.log 2>&1
-    sudo service octoprint stop | log_date >> /var/log/initlog.log 2>&1
-	/home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip" | log_date >> /var/log/initlog.log 2>&1
-    sudo service octoprint start | log_date >> /var/log/initlog.log 2>&1
-    sudo service octoprint status | log_date >> /var/log/initlog.log 2>&1
+    #echo "Installing OctoKlipper" | log_date >> /var/log/initlog.log 2>&1
+    #sudo service octoprint stop | log_date >> /var/log/initlog.log 2>&1
+	#/home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip" | log_date >> /var/log/initlog.log 2>&1
+    #sudo service octoprint start | log_date >> /var/log/initlog.log 2>&1
+    #sudo service octoprint status | log_date >> /var/log/initlog.log 2>&1
     
     #clear terminal history
     cat /dev/null > /home/pi/.bash_history && history -c

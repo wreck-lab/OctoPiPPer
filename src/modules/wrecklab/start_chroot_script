@@ -23,8 +23,8 @@ echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
 # start the 
-(crontab -u "${BASE_USER}" -l; echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
+( echo "@reboot /home/pi/scripts/wreck3dctrl" ) | crontab -u "${BASE_USER}" -
 
 # install OctoKlipper plugin
-#sudo service octoprint stop
-#sudo -u "${BASE_USER}" /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
+echo "Installing OctoKlipper"
+sudo -u "${BASE_USER}" /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
