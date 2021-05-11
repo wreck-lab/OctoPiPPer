@@ -47,7 +47,6 @@ jobs:
 
     - name: Build Image
       run: |
-        echo $PHAT_VERSION
         sudo modprobe loop
         cd repository/src
         sudo bash -x ./build_dist
