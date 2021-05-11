@@ -9,10 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        phat_v: [v1]
-        
     steps:
     - name: Install Dependencies
       run: |
@@ -49,9 +45,7 @@ jobs:
       run: |
         sudo modprobe loop
         cd repository/src
-        sudo bash -x ./build_dist $PHAT_V
-      env:
-        PHAT_V: ${{ matrix.phat_v }}
+        sudo bash -x ./build_dist
     
     - name: Copy output
       id: copy
