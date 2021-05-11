@@ -28,7 +28,7 @@ sudo -u "${BASE_USER}" git clone $KLIPPER_REPO_SHIP klipper
 #sudo -u "${BASE_USER}" git checkout tags/$KLIPPER_REPO_TAG
 
 sudo -u pi bash /home/pi/install-custompios.sh
-sudo -u pi bash /home/pi/install-config.sh $PHAT_VERSION
+sudo -u pi bash /home/pi/install-config.sh $KLIPPER_PHAT_VERSION
 
 rm /home/pi/install-custompios.sh
 rm /home/pi/install-config.sh
