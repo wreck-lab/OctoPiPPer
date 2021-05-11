@@ -2,3 +2,4 @@ KLIPPER_VAR="This is a module variable"
 [ -n "$KLIPPER_REPO_SHIP" ] || KLIPPER_REPO_SHIP=https://github.com/KevinOConnor/klipper.git
 [ -n "$KLIPPER_REPO_BRANCH" ] || KLIPPER_REPO_BRANCH=master
 [ -n "$KLIPPER_REPO_TAG" ] || KLIPPER_REPO_TAG=v0.9.1
+[ -n "$PHAT_VERSION" ] || PHAT_VERSION=v2
