@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        phat_ver: [v1, v2]
+        phat_v: [v1, v2]
         
     steps:
     - name: Install Dependencies
@@ -24,7 +24,7 @@ jobs:
         repository: 'guysoft/CustomPiOS'
         path: CustomPiOS
       env:
-        phat_ver: ${{ matrix.phat_ver }}
+        PHAT_VERSION: ${{ matrix.phat_v }}
       
     - name: Checkout Project Repository
       uses: actions/checkout@v2
