@@ -29,8 +29,6 @@ jobs:
       with:
         path: repository
         submodules: true
-      env:
-        PHAT_VERSION: ${{ matrix.phat_v }}
         
     - name: Download Raspbian Image
       run: |
@@ -52,7 +50,9 @@ jobs:
         sudo modprobe loop
         cd repository/src
         sudo bash -x ./build_dist
-        
+      env:
+        PHAT_VERSION: ${{ matrix.phat_v }}
+    
     - name: Copy output
       id: copy
       run: |
