@@ -1,2 +1,2 @@
 WRECKLAB_VAR="This is a module variable"
-[ -n "$PHAT_VERSION" ] || PHAT_VERSION=v2
+[ -n "$WRECKLAB_PHAT_VERSION" ] || WRECKLAB_PHAT_VERSION=v2
