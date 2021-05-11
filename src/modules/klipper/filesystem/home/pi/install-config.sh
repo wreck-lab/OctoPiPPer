@@ -3,8 +3,8 @@
 # Force script to exit if an error occurs
 set -e
 
-PHAT_VERSION=$1
-#PHAT_VERSION=v2
+#PHAT_VERSION=$1
+PHAT_VERSION=v2
 
 echo "--- Configuring printHAT ${PHAT_VERSION}..."
 cp /home/pi/klipper_config/phat${PHAT_VERSION}_defconfig /home/pi/klipper/.config
