@@ -22,7 +22,8 @@ echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
 # enable firstrun daemon 
-if[[ $PHAT_VERSION == 'v1' ]]; then
+if[[ $PHAT_VERSION == "v1" ]]
+then
   systemctl_if_exists enable wreck3dctrl.service
 fi
 
