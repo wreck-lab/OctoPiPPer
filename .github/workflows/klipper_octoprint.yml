@@ -49,9 +49,9 @@ jobs:
       run: |
         sudo modprobe loop
         cd repository/src
-        sudo bash -x ./build_dist
+        sudo bash -x ./build_dist $PHAT_V
       env:
-        PHAT_VERSION: ${{ matrix.phat_v }}
+        PHAT_V: ${{ matrix.phat_v }}
     
     - name: Copy output
       id: copy
