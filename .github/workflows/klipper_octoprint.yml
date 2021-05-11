@@ -23,15 +23,15 @@ jobs:
       with:
         repository: 'guysoft/CustomPiOS'
         path: CustomPiOS
-      env:
-        PHAT_VERSION: ${{ matrix.phat_v }}
-      
+        
     - name: Checkout Project Repository
       uses: actions/checkout@v2
       with:
         path: repository
         submodules: true
-      
+      env:
+        PHAT_VERSION: ${{ matrix.phat_v }}
+        
     - name: Download Raspbian Image
       run: |
         cd repository/src/image
