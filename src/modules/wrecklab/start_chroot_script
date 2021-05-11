@@ -24,7 +24,7 @@ echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 # enable firstrun daemon 
 if[[ $PHAT_VERSION == 'v1' ]]; then
   systemctl_if_exists enable wreck3dctrl.service
-if
+fi
 
 # install OctoKlipper plugin
 echo "Installing OctoKlipper"
