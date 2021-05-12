@@ -6,7 +6,7 @@ set -e
 echo $1
 
 #KLIPPER_PHAT_VERSION=$1
-PHAT_VERSION=v2
+KLIPPER_PHAT_VERSION=v2
 
 echo "--- Configuring printHAT ${KLIPPER_PHAT_VERSION}..."
 cp /home/pi/klipper_config/phat${KLIPPER_PHAT_VERSION}_defconfig /home/pi/klipper/.config
