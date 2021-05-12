@@ -57,7 +57,8 @@ jobs:
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img
         echo "::set-output name=image::$IMAGE"
-        cp repository/src/workspace/klipperbin.tar.gz $BIN.tar.gz  
+        tar -xf repository/src/workspace/klipperbin.tar.gz
+        cp repository/src/workspace/klipperbin.bin $BIN.bin
         echo "::set-output name=bin::$BIN"
         
     # if we're releasing...release!
@@ -72,10 +73,10 @@ jobs:
     # otherwise upload artifacts
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.copy.outputs.image }}
+        name: ${{ steps.copy.outputs.image }}.zip
         path: ${{ steps.copy.outputs.image }}.zip
         
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.copy.outputs.bin }}
-        path: ${{ steps.copy.outputs.bin }}.tar.gz
+        name: ${{ steps.copy.outputs.bin }}.bin
+        path: ${{ steps.copy.outputs.bin }}.bin
