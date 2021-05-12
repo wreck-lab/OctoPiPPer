@@ -53,10 +53,13 @@ jobs:
         source repository/src/config
         NOW=$(date +"%Y-%m-%d-%H%M")
         IMAGE=$NOW-wrecklab-$DIST_VERSION
+        BIN=klipper-v$DIST_VERSION-$NOW
         cp repository/src/workspace/*.img $IMAGE.img
-        zip $IMAGE.zip $IMAGE.img     
+        zip $IMAGE.zip $IMAGE.img
         echo "::set-output name=image::$IMAGE"
-
+        cp repository/src/workspace/klipperbin.tar.gz $BIN.tar.gz  
+        echo "::set-output name=bin::$BIN"
+        
     # if we're releasing...release!
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -67,21 +70,12 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
     # otherwise upload artifacts
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
         name: ${{ steps.copy.outputs.image }}
         path: ${{ steps.copy.outputs.image }}.zip
         
-    # Upload Klipper binary (TODO: )
-    - name: Klipper binary
-      id: bin
-      run: |
-        source repository/src/config
-        NOW=$(date +"%Y-%m-%d-%H%M")
-        BIN=$NOW-v$DIST_VERSION
-        cp repository/src/workspace/home/pi/klipper/out/klipper.bin $BIN.bin    
-        echo "::set-output name=file::$BIN"
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.bin.outputs.file }}
-        path: ${{ steps.bin.outputs.file }}.zip
+        name: ${{ steps.copy.outputs.bin }}
+        path: ${{ steps.copy.outputs.bin }}.tar.gz
