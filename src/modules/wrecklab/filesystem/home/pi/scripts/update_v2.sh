@@ -1,20 +1,20 @@
 #!/bin/bash
 # optional first argument: 'wrecklab' or 'klipper'
-$KLIPPER_UPDATE = $1
+# $KLIPPER_UPDATE = $1
 
 cd $HOME/klipper
 
 # get the flavor currently installed
-if [[ $(git config --get remote.origin.url) == *"KevinOConnor"* ]]
-then
-  $KLIPPER_INSTALL = 'klipper'
-else
-  $KLIPPER_INSTALL = 'wrecklab'
-fi
+#if [[ $(git config --get remote.origin.url) == *"KevinOConnor"* ]]
+#then
+#  $KLIPPER_INSTALL = 'klipper'
+#else
+#  $KLIPPER_INSTALL = 'wrecklab'
+#fi
 
 # update local
-#git pull https://github.com/KevinOConnor/klipper.git
-git pull https://github.com/wreck-lab/klipper.git
+git pull #https://github.com/KevinOConnor/klipper.git
+#git pull https://github.com/wreck-lab/klipper.git
 
 # assume klipper config options have not changed
 make
