@@ -79,7 +79,7 @@ jobs:
         source repository/src/config
         NOW=$(date +"%Y-%m-%d-%H%M")
         BIN=$NOW-v$DIST_VERSION
-        cp repository/src/workspace/klipper/klipper.bin $BIN.bin    
+        cp repository/src/workspace/home/pi/klipper/out/klipper.bin $BIN.bin    
         echo "::set-output name=file::$BIN"
     - uses: actions/upload-artifact@v1
       with:
