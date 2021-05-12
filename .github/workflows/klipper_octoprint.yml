@@ -72,4 +72,16 @@ jobs:
         name: ${{ steps.copy.outputs.image }}
         path: ${{ steps.copy.outputs.image }}.zip
         
-        
+    # Upload Klipper binary (TODO: )
+    - name: Klipper binary
+      id: bin
+      run: |
+        source repository/src/config
+        NOW=$(date +"%Y-%m-%d-%H%M")
+        BIN=$NOW-v$DIST_VERSION
+        cp repository/src/workspace/klipper/klipper.bin $BIN.bin    
+        echo "::set-output name=file::$BIN"
+    - uses: actions/upload-artifact@v1
+      with:
+        name: ${{ steps.bin.outputs.file }}
+        path: ${{ steps.bin.outputs.file }}.zip
