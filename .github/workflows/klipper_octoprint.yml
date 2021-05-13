@@ -51,14 +51,14 @@ jobs:
       id: copy
       run: |
         source repository/src/config
-        NOW=$(date +"%Y-%m-%d-%H%M")
+        NOW=$(date +"%Y%m%d%H%M")
         IMAGE=$NOW-wrecklab-$DIST_VERSION
         BIN=klipper-v$DIST_VERSION-$NOW
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img
         echo "::set-output name=image::$IMAGE"
-        cp repository/src/workspace/klipperbin.tar.gz $BIN.tar.gz
         tar -xf repository/src/workspace/klipperbin.tar.gz
+        cp home/pi/klipper/out/klipper.bin $BIN.bin
         ls
         echo "::set-output name=bin::$BIN"
         
