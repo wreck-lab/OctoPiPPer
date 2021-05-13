@@ -58,6 +58,8 @@ jobs:
         zip $IMAGE.zip $IMAGE.img
         echo "::set-output name=image::$IMAGE"
         cp repository/src/workspace/klipperbin.tar.gz $BIN.tar.gz
+        tar -xf repository/src/workspace/klipperbin.tar.gz
+        ls
         echo "::set-output name=bin::$BIN"
         
     # if we're releasing...release!
