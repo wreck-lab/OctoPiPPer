@@ -52,7 +52,7 @@ jobs:
       run: |
         source repository/src/config
         NOW=$(date +"%Y%m%d%H%M")
-        IMAGE=$NOW-wrecklab-$DIST_VERSION
+        IMAGE=wrecklabOS-$DIST_VERSION-$NOW
         BIN=klipper-v$DIST_VERSION-$NOW
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img
@@ -79,5 +79,5 @@ jobs:
         
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.copy.outputs.bin }}.tar.gz
-        path: ${{ steps.copy.outputs.bin }}.tar.gz
+        name: ${{ steps.copy.outputs.bin }}.bin
+        path: ${{ steps.copy.outputs.bin }}.bin
