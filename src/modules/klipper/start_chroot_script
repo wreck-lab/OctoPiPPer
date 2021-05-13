@@ -32,7 +32,6 @@ sudo -u pi bash /home/pi/install-config.sh $KLIPPER_PHAT_VERSION
 
 # export the klipper binary to include it in the artifacs
 custompios_export klipperbin /home/pi/klipper/out/klipper.bin
-ls *.tar.gz
 
 rm /home/pi/install-custompios.sh
 rm /home/pi/install-config.sh
