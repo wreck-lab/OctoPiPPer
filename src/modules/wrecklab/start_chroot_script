@@ -24,6 +24,9 @@ echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 # enable firstrun daemon 
 systemctl_if_exists enable wreck3dctrl.service
 
+# add user to gpio
+sudo usermod -a -G gpio "${BASE_USER}"
+
 # install OctoKlipper plugin
 echo "Installing OctoKlipper"
 sudo -u "${BASE_USER}" /home/pi/oprint/bin/pip install "https://github.com/thelastWallE/OctoprintKlipperPlugin/archive/master.zip"
