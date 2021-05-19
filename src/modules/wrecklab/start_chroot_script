@@ -24,6 +24,9 @@ echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 # enable firstrun daemon 
 systemctl_if_exists enable wreck3dctrl.service
 
+# update script permissions
+chmod +x /home/"${BASE_USER}"/scripts/update_v2.sh
+
 # add user to gpio
 sudo usermod -a -G gpio "${BASE_USER}"
 
