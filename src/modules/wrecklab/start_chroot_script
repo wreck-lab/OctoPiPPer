@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# Wrecklab
-# Adds to /boot configuration files that setup the firstrun and UART usage
-# Written by Wrecklab <wrecklab at wrecklab dot com>
-# 
-########
+
 set -x
 set -e
 
