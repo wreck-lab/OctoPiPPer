@@ -2,6 +2,9 @@
 
 A [Raspberry Pi](http://www.raspberrypi.org/) distribution with out-of-the-box support for the Wrecklab's printHAT control boards.
 
+## Manual
+The reference manual for the printHAT control boards can be found [here](https://docs.wrecklab.com/)
+
 ## Configuration files
 
 A shortcut to the configuration files included in the distribution:
