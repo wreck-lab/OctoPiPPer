@@ -1,4 +1,4 @@
-<a href="https://www.wrecklab.com/"><img src="wrecklab_logo.png" width="80">
+<a href="https://www.wrecklab.com/"><img src="wrecklab_logo.png" width="80"></a>
 
 ## wrecklabOS
 
