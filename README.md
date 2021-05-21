@@ -1,6 +1,8 @@
+<a href="https://www.wrecklab.com/"><img src="wrecklab_logo.png" width="80">
+
 ## wrecklabOS
 
-A [Raspberry Pi](http://www.raspberrypi.org/) distribution with out-of-the-box support for the Wrecklab's printHAT control boards.
+A [Raspberry Pi](http://www.raspberrypi.org/) distribution with out-of-the-box support for the [Wrecklab](https://www.wrecklab.com/)'s printHAT control boards.
 
 ## Manual
 The reference manual for the printHAT control boards can be found [here](https://docs.wrecklab.com/)
