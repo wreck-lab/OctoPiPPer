@@ -114,6 +114,9 @@ done
 # self update
 selfUpdate
 
+echo"exit"
+exit
+
 # create log file, if not there
 touch $LOG
 
