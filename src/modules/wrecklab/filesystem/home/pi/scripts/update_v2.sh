@@ -86,16 +86,16 @@ selfUpdate() {
   fi
 
   # Spawn update script
-  cat > selfUpdate.sh << EOF
+  echo '
 #!/bin/bash
 # Overwrite old file with new
-if mv "$0.tmp" "$0"; then
+if mv "'$0'.tmp" "'$0'"; then
   echo "Done. Update complete."
   rm \$0
 else
   echo "Failed!"
 fi
-EOF
+EOF' > selfUpdate.sh
 
   echo -n "Inserting update process..."
   exec /bin/bash updateScript.sh
