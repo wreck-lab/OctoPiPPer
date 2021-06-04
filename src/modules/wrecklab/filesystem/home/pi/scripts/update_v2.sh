@@ -87,10 +87,11 @@ selfUpdate() {
   echo '
 #!/bin/bash
 # Overwrite old file with new
-if mv "'$0'.tmp" "'$0'"; then
+if mv "'$SELF'.tmp" "'$SELF'"; then
   echo "Done. Update complete."
   echo "PLEASE RELAUNCH THE SCRIPT"
   rm \$0
+  exec /bin/bash "'$SELF'"
 else
   echo "Failed!"
 fi' > selfup.sh
@@ -109,6 +110,9 @@ while getopts fub: o; do
     (*) usage
   esac
 done
+
+# self update
+selfUpdate
 
 # create log file, if not there
 touch $LOG
