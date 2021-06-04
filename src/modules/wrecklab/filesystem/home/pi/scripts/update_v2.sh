@@ -1,15 +1,18 @@
 #!/bin/bash
 
-PROGNAME=$0
+SELF=$(basename "$0")
 FORCE=false
 BRANCH="master"
 LOCAL=$HOME/klipper
-REMOTE="https://github.com/wreck-lab/klipper.git"
+REPO_REM="wreck-lab/klipper"
+SELF_REM="https://raw.githubusercontent.com/wreck-lab/wrecklabOS/devel/src/modules/wrecklab/filesystem/home/pi/scripts/"$SELF
+#SELF_REM="https://raw.githubusercontent.com/wreck-lab/klipper-test/main/"$SELF
+
 LOG=/tmp/init.log
 
 usage() {
   cat << EOF >&2
-Usage: $PROGNAME [-v] [-d <dir>] [-f <file>]
+Usage: $SELF [-v] [-d <dir>] [-f <file>]
  -b <branch>: branch to pull (default to master)
  -f         : force update and flash
 EOF
@@ -23,8 +26,7 @@ log_date() {
 }
 
 vercomp() {
-    if [[ $1 == $2 ]]
-    then
+    if [[ $1 == $2 ]]; then
         return 0
     fi
     local IFS=.
@@ -36,8 +38,7 @@ vercomp() {
     done
     for ((i=0; i<${#ver1[@]}; i++))
     do
-        if [[ -z ${ver2[i]} ]]
-        then
+        if [[ -z ${ver2[i]} ]]; then
             # fill empty fields in ver2 with zeros
             ver2[i]=0
         fi
@@ -53,6 +54,49 @@ vercomp() {
     return 0
 }
 
+selfUpdate() {
+  echo "Performing self-update..."
+
+  # Download new version
+  echo -n "Downloading latest version..."
+  if ! wget --quiet --output-document="$SELF.tmp" $SELF_REM ; then
+    echo "Failed: Error while trying to wget new version!"
+    echo "File requested: https://raw.githubusercontent.com/"$REPO_REM"/master/"$SELF
+    exit 1
+  fi
+  echo "Done."
+
+  # Check for new versions
+  SIZE_LOC=$(stat --printf="%s" $SELF)
+  echo "Size loc: "$SIZE_LOC
+  SIZE_REM=$(stat --printf="%s" "$SELF.tmp")
+  echo "Size rem: "$SIZE_REM
+
+  exit
+
+  # Copy over modes from old version
+  OCTAL_MODE=$(stat -c '%a' $SELF)
+  if ! chmod $OCTAL_MODE "$0.tmp" ; then
+    echo "Failed: Error while trying to set mode on $0.tmp."
+    exit 1
+  fi
+
+  # Spawn update script
+  cat > selfUpdate.sh << EOF
+#!/bin/bash
+# Overwrite old file with new
+if mv "$0.tmp" "$0"; then
+  echo "Done. Update complete."
+  rm \$0
+else
+  echo "Failed!"
+fi
+EOF
+
+  echo -n "Inserting update process..."
+  exec /bin/bash updateScript.sh
+}
+
 
 # parse arguments
 while getopts fb: o; do
@@ -63,13 +107,22 @@ while getopts fb: o; do
   esac
 done
 
+# self update
+selfUpdate
+
+exit
+
 # create log file, if not there
 touch $LOG
 
 # get local and remote info
 cd $LOCAL
 TAG_LOC=$(git describe --tags --abbrev=0)
-TAG_REM=$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags $REMOTE '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)
+TAG_REM=$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags "https://github.com/"$REPO_REM '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)
+
+echo $TAG_REM
+echo "https://raw.githubusercontent.com/"$REPO_REM"/master/"$(basename "$0")
+exit
 
 # check connection
 if [ -z "$TAG_REM" ]; then
