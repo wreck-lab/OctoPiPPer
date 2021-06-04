@@ -90,7 +90,7 @@ selfUpdate() {
 if mv "'$SELF'.tmp" "'$SELF'"; then
   echo "Done. Update complete."
   echo "PLEASE RELAUNCH THE SCRIPT"
-  rm \$0
+  rm $0
   exec /bin/bash "'$SELF'"
 else
   echo "Failed!"
@@ -114,7 +114,7 @@ done
 # self update
 selfUpdate
 
-echo"exit"
+echo "exit"
 exit
 
 # create log file, if not there
