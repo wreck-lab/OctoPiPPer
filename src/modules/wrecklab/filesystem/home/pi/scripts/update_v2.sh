@@ -68,11 +68,16 @@ selfUpdate() {
 
   # Check for new versions
   SIZE_LOC=$(stat --printf="%s" $SELF)
-  echo "Size loc: "$SIZE_LOC
   SIZE_REM=$(stat --printf="%s" "$SELF.tmp")
-  echo "Size rem: "$SIZE_REM
 
-  exit
+  if [ "$SIZE_LOC" -eq "$SIZE_REM" ]; then
+    echo "$SIZE_LOC $SIZE_REM"
+    return
+  else
+    echo "not equal"
+    echo "$SIZE_LOC $SIZE_REM"
+    return
+  fi
 
   # Copy over modes from old version
   OCTAL_MODE=$(stat -c '%a' $SELF)
@@ -110,6 +115,7 @@ done
 # self update
 selfUpdate
 
+echo "before exit"
 exit
 
 # create log file, if not there
