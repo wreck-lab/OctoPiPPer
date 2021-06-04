@@ -89,7 +89,8 @@ selfUpdate() {
 # Overwrite old file with new
 if mv "'$0'.tmp" "'$0'"; then
   echo "Done. Update complete."
-  rm $0
+  echo "PLEASE RELAUNCH THE SCRIPT"
+  rm \$0
 else
   echo "Failed!"
 fi' > selfup.sh
@@ -100,19 +101,14 @@ fi' > selfup.sh
 
 
 # parse arguments
-while getopts fb: o; do
+while getopts fub: o; do
   case $o in
     (f) FORCE=true;;
     (b) BRANCH=$OPTARG;;
+    (u) selfUpdate;;
     (*) usage
   esac
 done
-
-# self update
-selfUpdate
-
-echo "before exit"
-exit
 
 # create log file, if not there
 touch $LOG
@@ -121,10 +117,6 @@ touch $LOG
 cd $LOCAL
 TAG_LOC=$(git describe --tags --abbrev=0)
 TAG_REM=$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags "https://github.com/"$REPO_REM '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)
-
-echo $TAG_REM
-echo "https://raw.githubusercontent.com/"$REPO_REM"/master/"$(basename "$0")
-exit
 
 # check connection
 if [ -z "$TAG_REM" ]; then
