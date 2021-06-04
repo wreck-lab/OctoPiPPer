@@ -70,12 +70,10 @@ selfUpdate() {
   SIZE_REM=$(stat --printf="%s" "$SELF.tmp")
 
   if [ "$SIZE_LOC" -eq "$SIZE_REM" ]; then
-    echo "$SIZE_LOC $SIZE_REM"
+    echo "Local version already latest."
     return
   else
-    echo "not equal"
-    echo "$SIZE_LOC $SIZE_REM"
-    return
+    echo "Updating to latest version..."
   fi
 
   # Copy over modes from old version
