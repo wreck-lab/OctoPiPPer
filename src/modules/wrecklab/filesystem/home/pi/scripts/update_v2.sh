@@ -89,7 +89,7 @@ selfUpdate() {
 # Overwrite old file with new
 if mv "'$SELF'.tmp" "'$SELF'"; then
   echo "Done. Update complete."
-  echo "PLEASE RELAUNCH THE SCRIPT"
+  echo "Restarting..."
   rm $0
   exec /bin/bash "'$SELF'"
 else
