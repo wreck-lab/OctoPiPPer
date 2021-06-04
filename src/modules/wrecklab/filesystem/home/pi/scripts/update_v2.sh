@@ -95,10 +95,10 @@ if mv "'$0'.tmp" "'$0'"; then
 else
   echo "Failed!"
 fi
-EOF' > selfUpdate.sh
+EOF' > selfup.sh
 
   echo -n "Inserting update process..."
-  exec /bin/bash updateScript.sh
+  exec /bin/bash selfup.sh
 }
 
 
