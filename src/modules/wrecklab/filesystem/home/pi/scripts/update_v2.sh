@@ -6,7 +6,6 @@ BRANCH="master"
 LOCAL=$HOME/klipper
 REPO_REM="wreck-lab/klipper"
 SELF_REM="https://raw.githubusercontent.com/wreck-lab/wrecklabOS/devel/src/modules/wrecklab/filesystem/home/pi/scripts/"$SELF
-#SELF_REM="https://raw.githubusercontent.com/wreck-lab/klipper-test/main/"$SELF
 
 LOG=/tmp/init.log
 
@@ -67,7 +66,7 @@ selfUpdate() {
   echo "Done."
 
   # Check for new versions
-  SIZE_LOC=$(stat --printf="%s" $SELF)
+  SIZE_LOC=$(stat --printf="%s" "$SELF")
   SIZE_REM=$(stat --printf="%s" "$SELF.tmp")
 
   if [ "$SIZE_LOC" -eq "$SIZE_REM" ]; then
