@@ -59,7 +59,7 @@ selfUpdate() {
 
   # Download new version
   echo -n "Downloading latest version..."
-  if ! wget --quiet --output-document="$SELF.tmp" $SELF_REM ; then
+  if ! wget -O --quiet --output-document="$SELF.tmp" $SELF_REM ; then
     echo "Failed: Error while trying to wget new version!"
     echo "File requested: https://raw.githubusercontent.com/"$REPO_REM"/master/"$SELF
     exit 1
