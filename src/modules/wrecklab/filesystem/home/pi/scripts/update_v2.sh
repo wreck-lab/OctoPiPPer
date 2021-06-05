@@ -205,7 +205,6 @@ while getopts ab: o; do
 done
 
 echo "Updating... "
-touch $LOG
 
 # check connectivity first
 check_network
