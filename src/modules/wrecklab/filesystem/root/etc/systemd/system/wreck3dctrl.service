@@ -5,7 +5,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/pi/scripts/update_v2.sh
+ExecStart=/home/pi/scripts/firstrun.sh
 RemainAfterExit=yes
 
 [Install]
