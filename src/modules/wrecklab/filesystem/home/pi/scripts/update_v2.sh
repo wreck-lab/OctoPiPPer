@@ -192,11 +192,6 @@ update_klipper() {
 
 
 ## SCRIPT STARTS HERE
-echo "Updating... "
-touch $LOG
-
-# check connectivity first
-check_network
 
 # parse arguments
 while getopts ab: o; do
@@ -206,6 +201,12 @@ while getopts ab: o; do
     (*) usage
   esac
 done
+
+echo "Updating... "
+touch $LOG
+
+# check connectivity first
+check_network
 
 # only if online, look for updates
 if [ $NET -eq "1" ]; then
