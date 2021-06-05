@@ -16,7 +16,7 @@ if [[ -n "$(find /boot -name 'firstrun*' | head -1)" || "$FORCE" = "true" ]]; th
   echo "OK"
 
   # run the update script with no user prompt (auto), and get the result
-  ./update_v2.sh -a
+  source /home/pi/scripts/update_v2.sh -a
   RES=$?
 
   echo -n "Updating process successful... "
