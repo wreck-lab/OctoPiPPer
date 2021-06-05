@@ -207,10 +207,9 @@ while getopts ab: o; do
   esac
 done
 
+# only if only, look for updates
 if [ $NET -eq "1" ]; then
-  # try script update
   update_script
-  # try system update
   cd $LOCAL
   update_system
 fi
