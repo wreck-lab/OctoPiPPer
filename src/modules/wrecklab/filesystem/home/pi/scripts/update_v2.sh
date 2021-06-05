@@ -1,6 +1,8 @@
 #!/bin/bash
 
 SELF=$(basename "$0")
+ARGS="$*"
+
 AUTO=false
 BRANCH="master"
 LOCAL=$HOME/klipper
@@ -107,7 +109,7 @@ if mv "'$SELF'.tmp" "'$SELF'"; then
   echo "Done. Update complete."
   echo "Restarting..."
   rm $0
-  exec /bin/bash "'$SELF'"
+  exec /bin/bash "'$SELF $ARGS'"
 else
   echo "Failed!"
 fi' > selfup.sh
