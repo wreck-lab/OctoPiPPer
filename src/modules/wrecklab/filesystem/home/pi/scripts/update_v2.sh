@@ -207,7 +207,7 @@ while getopts ab: o; do
   esac
 done
 
-# only if only, look for updates
+# only if online, look for updates
 if [ $NET -eq "1" ]; then
   update_script
   cd $LOCAL
