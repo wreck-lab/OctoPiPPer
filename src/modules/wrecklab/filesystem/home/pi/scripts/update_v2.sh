@@ -5,10 +5,11 @@ ARGS="$*"
 
 LOG=/tmp/init.log
 
+ERR=0
 AUTO=false
 RESET=true
 BRANCH="master"
-HOME=/home/pi
+SCRIPTS=/home/pi/scripts
 LOCAL=$HOME/klipper
 REPO_REM="wreck-lab/klipper"
 SELF_REM="https://raw.githubusercontent.com/wreck-lab/wrecklabOS/devel/src/modules/wrecklab/filesystem/home/pi/scripts/"$SELF
@@ -79,7 +80,7 @@ update_script() {
 
   # Download new version
   echo -n "Downloading latest version... "
-  if ! wget -O --quiet --output-document="$SELF.tmp" $SELF_REM ; then
+  if ! wget -O --quiet --output-document="$SCRIPTS/$SELF.tmp" $SELF_REM ; then
     echo "Failed: Error while trying to wget new version!"
     echo "File requested: https://raw.githubusercontent.com/"$REPO_REM"/master/"$SELF
     exit 1
@@ -87,8 +88,8 @@ update_script() {
   echo "OK"
 
   # use size to detect new file
-  SIZE_LOC=$(stat --printf="%s" "$SELF")
-  SIZE_REM=$(stat --printf="%s" "$SELF.tmp")
+  SIZE_LOC=$(stat --printf="%s" "$SCRIPTS/$SELF")
+  SIZE_REM=$(stat --printf="%s" "$SCRIPTS/$SELF.tmp")
 
   if [ "$SIZE_LOC" -eq "$SIZE_REM" ]; then
     echo "Local version already up to date."
@@ -108,11 +109,11 @@ update_script() {
   echo '
 #!/bin/bash
 # Overwrite old file with new
-if mv "'$SELF'.tmp" "'$SELF'"; then
+if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
   echo "Done. Update complete."
   echo "Restarting..."
   rm $0
-  exec /bin/bash "'$SELF $ARGS'"
+  exec /bin/bash "'$SCRIPTS'/'$SELF $ARGS'"
 else
   echo "Failed!"
 fi' > selfup.sh
@@ -180,18 +181,23 @@ update_klipper() {
 
   # reset board
   if [ "$RESET" = "true" ]; then
-    $HOME/scripts/reset_pin_cycle.sh
+    $SCRIPTS/reset_pin_cycle.sh
   fi
 
   # flash
-  /usr/bin/make serialflash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> $LOG 2>&1
+  /usr/bin/make serialflash FLASH_DEVICE=/dev/ttyAMA0
+  ERR=$?
+
+  if [ "$ERR" -ne "0" ]; then
+    echo "ERROR flashing the board !!!" | log_date >> $LOG 2>&1
+  fi
 
   if [ "$AUTO" = "false" ]; then
     read -p "Remove the BOOT jumper and press any key to continue: " jumper
   fi
 
   # start klipper
-  echo -n "Staring Klipper service... "
+  echo -n "Starting Klipper service... "
   sudo service klipper start
   echo "OK"
 
@@ -226,4 +232,4 @@ cd $LOCAL
 update_klipper
 
 echo "Done"
-exit 0
+exit $ERR
