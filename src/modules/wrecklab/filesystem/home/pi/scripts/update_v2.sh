@@ -10,7 +10,7 @@ AUTO=false
 RESET=true
 BRANCH="master"
 SCRIPTS=/home/pi/scripts
-LOCAL=$HOME/klipper
+LOCAL=/home/pi/klipper
 REPO_REM="wreck-lab/klipper"
 SELF_REM="https://raw.githubusercontent.com/wreck-lab/wrecklabOS/devel/src/modules/wrecklab/filesystem/home/pi/scripts/"$SELF
 
