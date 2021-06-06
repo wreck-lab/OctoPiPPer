@@ -79,7 +79,7 @@ update_script() {
   echo "Starting script update... "
 
   # Download new version
-  echo -n "Downloading latest version... "
+  echo "Downloading latest version... "
   if ! wget -O --quiet --output-document="$SCRIPTS/$SELF.tmp" $SELF_REM ; then
     echo "Failed: Error while trying to wget new version!"
     echo "File requested: https://raw.githubusercontent.com/"$REPO_REM"/master/"$SELF
