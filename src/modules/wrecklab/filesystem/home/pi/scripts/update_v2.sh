@@ -3,27 +3,30 @@
 SELF=$(basename "$0")
 ARGS="$*"
 
+LOG=/tmp/init.log
+
 AUTO=false
+RESET=true
 BRANCH="master"
+HOME=/home/pi
 LOCAL=$HOME/klipper
 REPO_REM="wreck-lab/klipper"
 SELF_REM="https://raw.githubusercontent.com/wreck-lab/wrecklabOS/devel/src/modules/wrecklab/filesystem/home/pi/scripts/"$SELF
 
-LOG=/tmp/init.log
+log_date() {
+  while IFS= read -r line; do
+    echo "$(date) $line"
+  done
+}
 
 usage() {
   cat << EOF >&2
 Usage: $SELF [-v] [-d <dir>] [-f <file>]
  -b <branch>: branch to pull (default to master)
  -a         : auto, no user prompt
+ -r         : no toggle reset
 EOF
   exit 1
-}
-
-log_date() {
-  while IFS= read -r line; do
-    echo "$(date) $line"
-  done
 }
 
 set_time_net() {
@@ -176,7 +179,9 @@ update_klipper() {
   echo "OK"
 
   # reset board
-  $HOME/scripts/reset_pin_cycle.sh
+  if [ "$RESET" = "true" ]; then
+    $HOME/scripts/reset_pin_cycle.sh
+  fi
 
   # flash
   /usr/bin/make serialflash FLASH_DEVICE=/dev/ttyAMA0 | log_date >> $LOG 2>&1
@@ -196,10 +201,11 @@ update_klipper() {
 ## SCRIPT STARTS HERE
 
 # parse arguments
-while getopts ab: o; do
+while getopts arb: o; do
   case $o in
     (b) BRANCH=$OPTARG;;
     (a) AUTO=true;;
+    (r) RESET=false;;
     (*) usage
   esac
 done

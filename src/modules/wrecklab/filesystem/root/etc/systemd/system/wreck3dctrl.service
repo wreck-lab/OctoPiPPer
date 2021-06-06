@@ -1,5 +1,5 @@
 [Unit]
-Description=Wreck3D Controller Startup
+Description=WrecklabOS Startup
 Before=klipper.service octoprint.service
 After=network-online.target
 
