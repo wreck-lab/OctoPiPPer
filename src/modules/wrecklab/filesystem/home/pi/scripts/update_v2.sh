@@ -104,7 +104,7 @@ update_script() {
   # Copy over modes from old version
   OCTAL_MODE=$(stat -c '%a' "$SCRIPTS/$SELF")
   if ! chmod $OCTAL_MODE "$SCRIPTS/$SELF.tmp" ; then
-    echo "Failed: Error while trying to set mode on $0.tmp."
+    echo "Failed: Error while trying to set mode on $SELF.tmp."
     exit 1
   fi
 
@@ -112,18 +112,18 @@ update_script() {
   echo '#!/bin/bash
 # Overwrite old file with new
 if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
-  echo "Done. Update complete."
-  echo "Restarting..."
-  exec /bin/bash "'$SCRIPTS'/'$SELF $ARGS'"
+  echo "!!! UPDATE SUCCESSFUL - PLEASE RESTART THE SCRIPT !!!"
+  rm $0
+  exit 0
 else
-  echo "Failed!"
+  echo "!!! UPDATE FAILED !!!"
+  rm $0
+  exit 1
 fi' > $SCRIPTS/selfup.sh
-  chmod +x $SCRIPTS/selfup.sh
 
-  if [ $UPD = "true" ]; then
    echo -n "Inserting update process... "
    exec /bin/bash $SCRIPTS/selfup.sh
-  fi
+
 }
 
 update_system() {
@@ -230,7 +230,10 @@ check_network
 
 # only if online, look for updates
 if [ $NET -eq "1" ]; then
-  update_script
+  if [ $UPD = "true" ]; then
+    update_script
+  fi
+
   cd $LOCAL
   update_system
 fi
