@@ -33,14 +33,14 @@ if [[ -n "$(find /boot -name 'firstrun*' | head -1)" || "$FORCE" = "true" ]]; th
     echo "OK"
     echo -n "Clearing firstrun... "
     /usr/bin/rm -f /boot/firstrun* | log_date >> $LOG 2>&1
-    echo "OK" | log_date >> $LOG 2>&1
+    echo "OK"
 
   else
-    echo "NO" | log_date >> $LOG 2>&1
+    echo "NO"
 
   fi
 
 else
-  echo "NO" | log_date >> $LOG 2>&1
+  echo "NO"
 
 fi
