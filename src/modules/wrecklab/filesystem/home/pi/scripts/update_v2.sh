@@ -117,11 +117,11 @@ if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
   exec /bin/bash "'$SCRIPTS'/'$SELF $ARGS'"
 else
   echo "Failed!"
-fi' > selfup.sh
+fi' > $SCRIPTS/selfup.sh
 
   if [ $UPD = "true" ]; then
    echo -n "Inserting update process... "
-   exec /bin/bash selfup.sh
+   exec /bin/bash $SCRIPTS/selfup.sh
  fi
 }
 
