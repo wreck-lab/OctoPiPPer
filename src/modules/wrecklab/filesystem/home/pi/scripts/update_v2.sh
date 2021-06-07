@@ -119,11 +119,12 @@ if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
 else
   echo "Failed!"
 fi' > $SCRIPTS/selfup.sh
+  chmod +x $SCRIPTS/selfup.sh
 
   if [ $UPD = "true" ]; then
    echo -n "Inserting update process... "
    exec /bin/bash $SCRIPTS/selfup.sh
- fi
+  fi
 }
 
 update_system() {
