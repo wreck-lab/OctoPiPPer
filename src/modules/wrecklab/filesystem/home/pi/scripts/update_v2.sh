@@ -114,7 +114,6 @@ update_script() {
 if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
   echo "Done. Update complete."
   echo "Restarting..."
-  rm $0
   exec /bin/bash "'$SCRIPTS'/'$SELF $ARGS'"
 else
   echo "Failed!"
