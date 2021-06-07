@@ -195,7 +195,9 @@ update_klipper() {
   ERR=$?
 
   if [ "$ERR" -ne "0" ]; then
-    echo "ERROR flashing the board !!!" | log_date >> $LOG 2>&1
+    echo "Board flashed successfully." | log_date >> $LOG 2>&1
+  else
+    echo "!!! ERROR flashing the board !!!" | log_date >> $LOG 2>&1
   fi
 
   if [ "$AUTO" = "false" ]; then
