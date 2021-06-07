@@ -8,6 +8,7 @@ LOG=/tmp/init.log
 ERR=0
 AUTO=false
 RESET=true
+UPD=true
 BRANCH="master"
 SCRIPTS=/home/pi/scripts
 LOCAL=/home/pi/klipper
@@ -26,6 +27,7 @@ Usage: $SELF [-v] [-d <dir>] [-f <file>]
  -b <branch>: branch to pull (default to master)
  -a         : auto, no user prompt
  -r         : no toggle reset
+ -u         : no self update
 EOF
   exit 1
 }
@@ -106,8 +108,7 @@ update_script() {
   fi
 
   # Spawn update script
-  echo '
-#!/bin/bash
+  echo '#!/bin/bash
 # Overwrite old file with new
 if mv "'$SCRIPTS'/'$SELF'.tmp" "'$SCRIPTS'/'$SELF'"; then
   echo "Done. Update complete."
@@ -118,8 +119,10 @@ else
   echo "Failed!"
 fi' > selfup.sh
 
-  echo -n "Inserting update process... "
-  exec /bin/bash selfup.sh
+  if [ $UPD = "true" ]; then
+   echo -n "Inserting update process... "
+   exec /bin/bash selfup.sh
+ fi
 }
 
 update_system() {
@@ -207,11 +210,12 @@ update_klipper() {
 ## SCRIPT STARTS HERE
 
 # parse arguments
-while getopts arb: o; do
+while getopts arub: o; do
   case $o in
     (b) BRANCH=$OPTARG;;
     (a) AUTO=true;;
     (r) RESET=false;;
+    (u) UPD=false;;
     (*) usage
   esac
 done
