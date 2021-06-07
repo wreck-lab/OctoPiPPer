@@ -165,8 +165,10 @@ update_klipper() {
   # this update must run in the repo folder
 
   # assume klipper config options have not changed
+  echo -n "Building Klipper... "
   /usr/bin/make clean | log_date >> $LOG 2>&1
   /usr/bin/make | log_date >> $LOG 2>&1
+  echo "OK"
 
   # confirm jumper
   while [ "$AUTO" = "false" ]; do
