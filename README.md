@@ -4,7 +4,7 @@
 
 ## Get a printHAT
 
-The printHAT boards are available from Wrecklab's shop or from one of our distributors.
+The printHAT boards are available from Wrecklab's shop and from our distributors.
 
 <a href="https://www.wrecklab.com/" target="_blank" rel="noopener" ><img src="assets/logo/wrecklab.png" width="60"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.123-3d.nl/" target="_blank" rel="noopener" ><img src="assets/logo/1233d.png" width="100"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
