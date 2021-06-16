@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# Wrecklab
-# Adds to /boot configuration files that setup the firstrun and UART usage
-# Written by Wrecklab <wrecklab at wrecklab dot com>
-# 
-########
+
 set -x
 set -e
 
@@ -22,10 +18,13 @@ echo 'enable-uart=1' >> /boot/config.txt
 echo 'dtoverlay=pi3-miniuart-bt' >> /boot/config.txt
 
 # enable firstrun daemon 
-#if[[ $WRECKLAB_PHAT_VERSION -eq 'v1' ]]
-#then
-#  systemctl_if_exists enable wreck3dctrl.service
-#fi
+systemctl_if_exists enable wreck3dctrl.service
+
+# update script permissions
+chmod +x /home/"${BASE_USER}"/scripts/update_v2.sh
+
+# add user to gpio
+sudo usermod -a -G gpio "${BASE_USER}"
 
 # install OctoKlipper plugin
 echo "Installing OctoKlipper"

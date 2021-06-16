@@ -1,11 +1,11 @@
 [Unit]
-Description=Wreck3D Controller Startup
+Description=WrecklabOS Startup
 Before=klipper.service octoprint.service
 After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/pi/scripts/wreck3dctrl
+ExecStart=/home/pi/scripts/firstrun.sh
 RemainAfterExit=yes
 
 [Install]
