@@ -1,0 +1,12 @@
+  
+/var/log/webcamd.log
+{
+    rotate 4
+    weekly
+    maxsize 64M
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+}
