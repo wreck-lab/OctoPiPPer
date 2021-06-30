@@ -9,6 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        frontend: [octoprint, mainsail]
+
+    env:
+      GUI: ${{ matrix.frontend }}
+
     steps:
     - name: Install Dependencies
       run: |
@@ -19,13 +27,13 @@ jobs:
       with:
         repository: 'guysoft/CustomPiOS'
         path: CustomPiOS
-        
+
     - name: Checkout Project Repository
       uses: actions/checkout@v2
       with:
         path: repository
         submodules: true
-        
+
     - name: Download Raspbian Image
       run: |
         cd repository/src/image
@@ -46,13 +54,13 @@ jobs:
         sudo modprobe loop
         cd repository/src
         sudo bash -x ./build_dist
-    
+
     - name: Copy output
       id: copy
       run: |
         source repository/src/config
         NOW=$(date +"%Y%m%d%H%M")
-        IMAGE=wrecklabOS-$DIST_VERSION-$NOW
+        IMAGE=wrecklabOS-$DIST_VERSION-$NOW-$GUI
         BIN=klipper-v$DIST_VERSION-$NOW
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img
@@ -61,7 +69,7 @@ jobs:
         cp home/pi/klipper/out/klipper.bin $BIN.bin
         ls
         echo "::set-output name=bin::$BIN"
-        
+
     # if we're releasing...release!
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -72,13 +80,13 @@ jobs:
           ${{ steps.copy.outputs.image }}.zip
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     
+
     # otherwise upload artifacts
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ steps.copy.outputs.image }}.zip
         path: ${{ steps.copy.outputs.image }}.zip
-        
+
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ steps.copy.outputs.bin }}.zip
