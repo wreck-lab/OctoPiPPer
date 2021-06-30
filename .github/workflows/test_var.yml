@@ -16,7 +16,7 @@ jobs:
     - name: set output
       id: set
       env:
-        GUI: ${{ matrix.cc }}
+        GUI: ${{ matrix.gui }}
       run: |
        cd src
        chmod +x test_var.sh
