@@ -1,0 +1,28 @@
+name: Test passing variables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        gui: [octoprint]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set output
+      id: set
+      env:
+        GUI: ${{ matrix.cc }}
+      run: |
+       cd src
+       chmod +x test_var.sh
+       ./test_var.sh
+
+    - name: use output
+      run: |
+        echo $GUI
+        echo ${{env.GUI }}
