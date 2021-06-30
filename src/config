@@ -1,7 +1,7 @@
 export DIST_NAME=Wrecklab
 export DIST_VERSION=0.0.1
 export BASE_IMAGE_RESIZEROOT=500
-if [ "$GUI" = "octoprint"]; then
+if [ "$GUI" = "octoprint" ]; then
   export BASE_IMAGE_ENLARGEROOT=3000
   export MODULES="base(raspicam, network, klipper, disable-services(octopi, auto-hotspot, wrecklab), password-for-sudo)"
 else
