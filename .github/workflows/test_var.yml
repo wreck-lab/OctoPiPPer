@@ -21,9 +21,8 @@ jobs:
        cd src
        chmod +x test_var.sh
        ./test_var.sh
-       cat config
 
     - name: use output
       run: |
-        echo $GUI
-        echo ${{env.GUI }}
+        cd src
+        cat config
