@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        gui: [octoprint]
+        gui: [octoprint, mainsail]
 
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +19,7 @@ jobs:
         GUI: ${{ matrix.gui }}
       run: |
        cd src
+       source config
        chmod +x test_var.sh
        ./test_var.sh
 

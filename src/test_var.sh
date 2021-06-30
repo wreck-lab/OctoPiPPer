@@ -1,1 +1,2 @@
 echo "$GUI"
+echo "$MODULES"
