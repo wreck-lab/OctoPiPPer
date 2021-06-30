@@ -8,6 +8,6 @@ else
   sed -i 's/^.*\bMODULES\b.*$/export MODULES="base(network, raspicam, klipper, moonraker, mainsail, mjpgstreamer, disable-services(auto-hotspot, wrecklab), password-for-sudo)"/' ./config
 fi
 
-stefaninos_octoprint
+#stefaninos_octoprint
 # export BASE_IMAGE_ENLARGEROOT=3000
 # export MODULES="base(raspicam, network, klipper, disable-services(octopi, auto-hotspot, wrecklab), password-for-sudo)"
