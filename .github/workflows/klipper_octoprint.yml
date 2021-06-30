@@ -42,6 +42,8 @@ jobs:
         GUI: ${{ matrix.frontend }}
       run: |
         cd repository/src
+        chmod +x test_var.sh
+        ./test_var.sh
         ../../CustomPiOS/src/update-custompios-paths
 
     - name: Force apt mirror to work around intermittent mirror hiccups
