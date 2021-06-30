@@ -19,9 +19,9 @@ jobs:
         GUI: ${{ matrix.gui }}
       run: |
        cd src
-       source config
        chmod +x test_var.sh
        ./test_var.sh
+       cat config
 
     - name: use output
       run: |
