@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        frontend: [octoprint]
+        frontend: [octoprint, mainsail]
 
     steps:
     - name: Install Dependencies
