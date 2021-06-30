@@ -1,4 +1,4 @@
-name: Build with Klipper + OctoPrint
+name: Build wrecklabOS
 
 on:
   workflow_dispatch:
