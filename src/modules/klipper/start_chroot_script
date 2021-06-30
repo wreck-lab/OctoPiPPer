@@ -24,8 +24,6 @@ usermod -a -G dialout pi
 
 cd /home/pi
 sudo -u "${BASE_USER}" git clone $KLIPPER_REPO_SHIP klipper
-#cd /home/pi/klipper
-#sudo -u "${BASE_USER}" git checkout tags/$KLIPPER_REPO_TAG
 
 sudo -u pi bash /home/pi/install-custompios.sh
 sudo -u pi bash /home/pi/install-config.sh $KLIPPER_PHAT_VERSION
