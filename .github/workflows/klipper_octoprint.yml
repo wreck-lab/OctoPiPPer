@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        frontend: [octoprint, mainsail]
+        frontend: [octoprint]
 
     env:
       GUI: ${{ matrix.frontend }}
