@@ -24,5 +24,5 @@ jobs:
 
     - name: use output
       run: |
-        cd src
-        cat config
+        cd src/modules/klipper/filesystem/home/pi/klipper_config/config/
+        cat *.cfg
