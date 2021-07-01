@@ -9,5 +9,6 @@ else
   for filename in modules/klipper/filesystem/home/pi/klipper_config/config/*.cfg; do
     printf "\n" >> "$filename"
     sed -i -e '$a[include mainsail.cfg]' "$filename"
+    printf "\n" >> "$filename"
   done
 fi
