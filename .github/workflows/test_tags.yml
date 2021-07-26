@@ -23,7 +23,7 @@ jobs:
 
       - name: Set Klipper environment
         run: |
-          ls
+          cd klipper
           echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo ${{ env.KLIPPER }}
 
