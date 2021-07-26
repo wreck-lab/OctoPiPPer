@@ -23,7 +23,7 @@ jobs:
       - name: Test
         env:
           GUI: ${{ matrix.frontend }}
-          NOW: ${date +"%Y%m%d%H%M"}
+          NOW: $(date +"%Y%m%d%H%M")
         run: |
           IMAGE=wrecklabOS-$RELEASE-$NOW-$GUI
           echo $IMAGE
