@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo "DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-          cd klipper
+          ls
           echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo ${GITHUB_REF#refs/*/}
       - name: Test
