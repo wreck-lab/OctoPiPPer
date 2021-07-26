@@ -31,6 +31,11 @@ jobs:
         path: repository
         submodules: true
 
+    - name: Set environment
+      run: |
+        echo "WOS_RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        echo "DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+
     - name: Download Raspbian Image
       run: |
         cd repository/src/image
@@ -64,9 +69,8 @@ jobs:
         GUI: ${{ matrix.frontend }}
       run: |
         source repository/src/config
-        NOW=$(date +"%Y%m%d%H%M")
-        IMAGE=wrecklabOS-$DIST_VERSION-$NOW-$GUI
-        BIN=klipper-v$DIST_VERSION-$NOW
+        IMAGE=wrecklabOS-$WOS_RELEASE-$DATE-$GUI
+        BIN=klipper-$WOS_RELEASE-$DATE
         cp repository/src/workspace/*.img $IMAGE.img
         zip $IMAGE.zip $IMAGE.img
         echo "::set-output name=image::$IMAGE"
