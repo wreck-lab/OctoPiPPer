@@ -1,0 +1,29 @@
+on:
+  push:
+    workflow_dispatch:
+    tags:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        frontend: [octoprint, mainsail]
+
+    steps:
+      - name: Set environment
+        uses: actions/checkout@v2
+        run: |
+          echo "RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo ${GITHUB_REF#refs/*/}
+
+      - name: Test
+        env:
+          GUI: ${{ matrix.frontend }}
+          NOW: ${date +"%Y%m%d%H%M"}
+        run: |
+          IMAGE=wrecklabOS-$RELEASE-$NOW-$GUI
+          echo $IMAGE
+          echo ${{ env.REL }}
