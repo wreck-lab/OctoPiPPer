@@ -16,16 +16,16 @@ jobs:
 
     steps:
       # checkout Klipper and set environment
-      - uses: actions/checkout@v2
-        with:
-          repository: 'KevinOConnor/klipper'
-          path: klipper
+      #- uses: actions/checkout@v2
+      #  with:
+      #    repository: 'KevinOConnor/klipper'
+      #    path: klipper
 
-      - name: Set Klipper environment
-        run: |
-          cd klipper
-          echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo ${{ env.KLIPPER }}
+      #- name: Set Klipper environment
+      #  run: |
+      #    cd klipper
+      #    echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      #    echo ${{ env.KLIPPER }}
 
       # checkout this repo and  set environment
       - uses: actions/checkout@v2
