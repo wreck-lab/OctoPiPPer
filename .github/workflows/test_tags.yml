@@ -16,12 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
       - name: Set environment
         run: |
           echo "RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo ${GITHUB_REF#refs/*/}
-
       - name: Test
         env:
           GUI: ${{ matrix.frontend }}
