@@ -2,9 +2,9 @@ name: Test tags
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - '*'
+  #push:
+  #  tags:
+  #    - '*'
 
 jobs:
   test:
