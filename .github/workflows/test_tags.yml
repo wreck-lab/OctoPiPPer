@@ -15,16 +15,21 @@ jobs:
         frontend: [octoprint, mainsail]
 
     steps:
-      # checkout Klipper
+      # checkout Klipper and set environment
       - uses: actions/checkout@v2
         with:
           repository: 'KevinOConnor/klipper'
           path: klipper
 
-      # checkout this repo
+      - name: Set Klipper environment
+        run: |
+          ls
+          echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo ${{ env.KLIPPER }}
+
+      # checkout this repo and  set environment
       - uses: actions/checkout@v2
 
-      # set environment
       - name: Set environment
         run: |
           echo "RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -32,11 +37,13 @@ jobs:
           ls
           echo "KLIPPER=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo ${GITHUB_REF#refs/*/}
+
+      # do some tests
       - name: Test
         env:
           GUI: ${{ matrix.frontend }}
         run: |
           IMAGE=wrecklabOS-$RELEASE-$DATE-$GUI
-          BIN=klipper-g$KLIPPER-$RELEASE-$DATE
+          BIN=klipper-$KLIPPER-$RELEASE-$DATE
           echo $IMAGE
           echo $BIN
