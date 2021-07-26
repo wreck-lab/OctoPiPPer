@@ -19,12 +19,12 @@ jobs:
       - name: Set environment
         run: |
           echo "RELEASE=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo "DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
           echo ${GITHUB_REF#refs/*/}
       - name: Test
         env:
           GUI: ${{ matrix.frontend }}
-          NOW: $(date +"%Y%m%d%H%M")
         run: |
-          IMAGE=wrecklabOS-$RELEASE-$NOW-$GUI
+          IMAGE=wrecklabOS-$RELEASE-$DATE-$GUI
           echo $IMAGE
           echo ${{ env.REL }}
